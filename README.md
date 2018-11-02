@@ -13,7 +13,7 @@ cd Server/
 ./run_servers.sh # convenience script for starting multiple resource managers
 ```
 This will use the terminal multiplexer ```tmux``` to ssh into 3 serparate machines to run the resource managers and start the Middleware on localhost.
-To switch between panes use ```Ctrl + b``` followed by the arrow-key in the direction you want to move.
+To switch between panes use ```Ctrl + b``` (don't hold it just press it once) followed by the arrow-key in the direction you want to move.
 To close the tmux session use ```tmux ls``` (in any pane) to get the current session number, then ```tmux kill-session -t [session number]```. Usually, the session number is 0.
 
 
