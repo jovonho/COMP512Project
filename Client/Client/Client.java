@@ -1,6 +1,8 @@
 package Client;
 
 import Server.Interface.*;
+import Server.Interface.IResourceManager.InvalidTransactionException;
+import Server.Interface.IResourceManager.TransactionAbortedException;
 import Server.Common.*;
 
 import java.util.*;
@@ -62,6 +64,12 @@ public abstract class Client
 			catch (ConnectException|UnmarshalException e) {
 				System.err.println((char)27 + "[31;1mCommand exception: " + (char)27 + "[0mConnection to server lost");
 			}
+			catch (TransactionAbortedException e) {
+				System.err.println((char)27 + "[31;1mTransaction aborted");
+			}
+			catch (InvalidTransactionException e) {
+				System.err.println((char)27 + "[31;1mInvalid Transaction exception");
+			}
 			catch (Exception e) {
 				System.err.println((char)27 + "[31;1mCommand exception: " + (char)27 + "[0mUncaught exception");
 				e.printStackTrace();
@@ -69,7 +77,7 @@ public abstract class Client
 		}
 	}
 
-	public void execute(Command cmd, Vector<String> arguments) throws RemoteException, NumberFormatException
+	public void execute(Command cmd, Vector<String> arguments) throws RemoteException, NumberFormatException, InvalidTransactionException, TransactionAbortedException
 	{
 		switch (cmd)
 		{
@@ -82,6 +90,35 @@ public abstract class Client
 					System.out.println(l_cmd.toString());
 				} else {
 					System.err.println((char)27 + "[31;1mCommand exception: " + (char)27 + "[0mImproper use of help command. Location \"help\" or \"help,<CommandName>\"");
+				}
+				break;
+			}
+			case Start: {
+				checkArgumentsCount(1, arguments.size());
+				
+				int txid = m_resourceManager.start();
+				System.out.println("Started new transaction [xid = " + txid + "]");
+				break;
+			}
+			case Abort: {
+				checkArgumentsCount(2, arguments.size());	
+				
+				int xid = toInt(arguments.elementAt(1));
+				
+				if (m_resourceManager.abort(xid)) {
+					System.out.println("Transaction " + xid + " successfully aborted");
+				}
+				break;
+			}
+			case Commit: {
+				//TODO
+				break;
+			}
+			case ShutDown: {
+				try {
+					m_resourceManager.shutdown();
+				} catch (Exception e) {
+					System.exit(0);
 				}
 				break;
 			}

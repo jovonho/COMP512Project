@@ -58,7 +58,7 @@ public class ResourceManager implements IResourceManager
 		}
 	}
 
-	// Deletes the encar item
+	// Deletes the item
 	protected boolean deleteItem(int xid, String key)
 	{
 		Trace.info("RM::deleteItem(" + xid + ", " + key + ") called");
@@ -393,5 +393,36 @@ public class ResourceManager implements IResourceManager
 	{
 		return m_name;
 	}
+
+	
+	
+	/**
+	 * Methods added for Middleware functionality
+	 */
+	@Override
+	public int start() throws RemoteException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean commit(int transactionId)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean abort(int transactionId) throws RemoteException {
+		// TODO Auto-generated method stub
+		return false;		
+	}
+
+	@Override
+	public void shutdown() throws RemoteException {
+		Trace.info("RM::" + m_name + " ready to shut down");
+		System.exit(0);
+	}
+
 }
  

@@ -20,11 +20,15 @@ public class LockManager
 	}
 	
 	public static void main(String[] args) {
-		testSuite();
+		try {
+			testSuite();
+		} catch (RedundantLockRequestException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// Testing method
-	public static void testSuite() {
+	public static void testSuite() throws RedundantLockRequestException {
 		
 		LockManager lockManager = new LockManager();
 		
@@ -162,7 +166,7 @@ public class LockManager
 			throw deadlock;
 		}
 		catch (RedundantLockRequestException redundantlockrequest) {
-			// Ignore redundant lock requests
+			// Ignore redundant locks
 			Trace.info("LM::lock(" + xid + ", " + data + ", " + lockType + ") " + redundantlockrequest.getLocalizedMessage());
 			return true;
 		} 

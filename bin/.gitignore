@@ -1,12 +1,2 @@
-/Client/
-/Makefile
-/RMIInterface.jar
-/RMItem.jar
 /Server/
-/java.policy
-/run_client.sh
-/run_middleware.sh
-/run_rmi.sh
-/run_server.sh
-/run_servers.sh
-/run_testclient.sh
+/Client/

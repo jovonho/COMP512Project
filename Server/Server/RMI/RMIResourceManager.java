@@ -52,6 +52,7 @@ public class RMIResourceManager extends ResourceManager
 					try {
 						registry.unbind(s_rmiPrefix + s_serverName);
 						System.out.println("'" + s_serverName + "' resource manager unbound");
+						System.out.println("Shutting Down");
 					}
 					catch(Exception e) {
 						System.err.println((char)27 + "[31;1mServer exception: " + (char)27 + "[0mUncaught exception");

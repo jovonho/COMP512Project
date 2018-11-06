@@ -31,6 +31,18 @@ public interface IResourceManager extends Remote
 	public void putItem(int xid, String key, RMItem value)
 	throws RemoteException;
 	
+	/**
+	 * Interface extension for milestone 2.
+	 */
+	
+	public int start() throws RemoteException;
+	
+	public boolean commit(int transactionId) throws RemoteException, InvalidTransactionException, TransactionAbortedException;
+	
+	public boolean abort(int transactionId) throws RemoteException, InvalidTransactionException, TransactionAbortedException;
+	
+	public void shutdown() throws RemoteException;
+	
 	
     /**
      * Add seats to a flight.
@@ -217,4 +229,12 @@ public interface IResourceManager extends Remote
      */
     public String getName()
         throws RemoteException;
+    
+    public class InvalidTransactionException extends Exception {
+    	
+    }
+    
+    public class TransactionAbortedException extends Exception {
+    	
+    }
 }

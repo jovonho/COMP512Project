@@ -2,6 +2,11 @@ package Client;
 
 public enum Command {
 	Help("List all available commands", "[CommandName]"),
+	
+	Start("Start a new transaction", ""),
+	Commit("Commit a transaction", "<xid>"),
+	Abort("Abort a transaction", "xid"),
+	ShutDown("Shutdown", ""),
 
 	AddFlight("Add a new flight number", "<xid>,<FlightNumber>,<NumberOfSeats>,<PricePerSeat>"),
 	AddCars("Add a new car location", "<xid>,<Location>,<NumberOfCar>,<Price>"),

@@ -10,8 +10,8 @@ FORCE: ;
 
 RMIInterface.jar: Server/Interface/IResourceManager.java 
 	@echo "Compiling RMI server interface"
-	javac Server/Interface/IResourceManager.java
-	jar cvf RMIInterface.jar Server/Interface/IResourceManager.class
+	javac Server/Interface/*.java
+	jar cvf RMIInterface.jar Server/Interface/*.class
 
 RMItem.jar: Server/Common/RMItem.java
 	@echo "Compiling RMItem jar"
